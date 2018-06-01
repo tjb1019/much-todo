@@ -1,0 +1,19 @@
+<main>
+  <section class="login">
+    <h1>Sign In</h1>
+    <form name="loginForm" method="post" (submit)="login()">
+      <div class="form-field">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" autofocus="true">
+      </div>
+      <div class="form-field">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+      </div>
+      <div class="form-buttons">
+        <button class="transparent" type="submit">Submit</button>
+      </div>
+    </form>
+    <a  class="signup-link" routerLink="/signup">Don't have an account? Click here to sign up!</a>
+  </section>
+</main>
