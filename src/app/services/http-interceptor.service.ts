@@ -7,6 +7,7 @@ import {
   HttpRequest,
   HttpErrorResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -20,7 +21,19 @@ export class HttpInterceptorService implements HttpInterceptor {
         headers: request.headers.set('Authorization', token)
       });
     }
-    return next.handle(request);
+    return next.handle(request).pipe(tap(
+      event => {
+        // manipulate successful responses
+      },
+      error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status == 401) {
+            console.error(error.message);
+            this.router.navigate(['/login']);
+          }
+        }
+      }
+    ));
   }
 
 }
