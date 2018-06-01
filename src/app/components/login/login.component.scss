@@ -13,32 +13,32 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
 
-  form {
-    width: 50%;
+    form {
+      width: 50%;
 
-    .form-field {
-      padding: 10px 0;
-      display: flex;
+      .form-field {
+        padding: 10px 0;
+        display: flex;
 
-      label {
-        width: 100px;
+        label {
+          width: 100px;
+        }
+
+        input {
+          flex: 1;
+        }
       }
 
-      input {
-        flex: 1;
+      .form-buttons {
+        padding: 5px 0;
+        text-align: right;
       }
     }
 
-    .form-buttons {
-      padding: 5px 0;
-      text-align: right;
+    .signup-link {
+      text-decoration: none;
+      color: var(--color-secondary);
     }
-  }
-
-  .signup-link {
-    text-decoration: none;
-    color: var(--color-secondary);
   }
 }
