@@ -1,0 +1,21 @@
+:root {
+
+  // color
+  --color-brand: hsl(199, 100%, 50%);
+  --color-primary: hsl(0, 0%, 13%);
+  --color-secondary: hsl(0, 0%, 29%);
+  --color-tertiary: hsl(0, 0%, 65%);
+  --color-subtle: hsl(0, 0%, 90%);
+
+  // typography
+  --font-primary: 'Barlow', sans-serif;
+  --font-title: 'Barlow Condensed', serif;
+
+  // font weight
+  --weight-heavy: 700;
+  --weight-light: 300;
+
+  // shadow
+  --shadow-dark: 0 4px 6px 0 hsla(0, 0%, 0%, 0.3);
+  --shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
