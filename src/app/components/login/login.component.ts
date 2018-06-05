@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', response['token']);
         this.router.navigate(['/']);
       })
-      .catch(error => {
-        this.errorMessage = error.error.message;
+      .catch(response => {
+        this.errorMessage = response.error.message;
         this.failed = true;
       })
       .then(() => this.loggingIn = false);

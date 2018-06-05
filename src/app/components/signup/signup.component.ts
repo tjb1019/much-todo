@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
     this.api.signup(body)
       .then(response => {
         localStorage.setItem('token', response['token']);
-        this.router.navigate(['/dash']);
+        this.router.navigate(['/']);
       })
       .catch(error => this.failed = true)
       .then(() => this.signingUp = false);
