@@ -1,6 +1,9 @@
 @import 'variables';
 @import 'mixins';
 @import 'buttons';
+@import 'forms';
+@import 'loading';
+@import 'errors';
 
 html {
   box-sizing: border-box;

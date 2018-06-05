@@ -1,3 +1,20 @@
-<p>
-  signup works!
-</p>
+<main>
+  <section class="signup">
+    <h1>Sign Up</h1>
+    <form name="signupForm" method="post" (submit)="signup()" *ngIf="!signingUp">
+      <div class="form-field">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" autofocus="true">
+      </div>
+      <div class="form-field">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+      </div>
+      <div class="form-buttons">
+        <button class="transparent" type="submit">Submit</button>
+      </div>
+    </form>
+    <div class="loading" *ngIf="signingUp"></div>
+    <p class="error" *ngIf="failed">Failed to create new user</p>
+  </section>
+</main>

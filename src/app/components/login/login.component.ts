@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ApiService } from '@services/api.service';
 
@@ -11,14 +12,16 @@ export class LoginComponent implements OnInit {
 
   loginForm: HTMLFormElement;
   loggingIn: boolean;
-  success: boolean;
+  failed: boolean;
+  errorMessage: string;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
-  ngOnViewInit() {
+  ngAfterViewInit() {
     this.loginForm = document.forms['loginForm'];
   }
 
@@ -33,8 +36,14 @@ export class LoginComponent implements OnInit {
     }
 
     this.api.login(body)
-      .then(response => localStorage.setItem('token', response['token']))
-      .catch(error => this.success = false)
+      .then(response => {
+        localStorage.setItem('token', response['token']);
+        this.router.navigate(['/']);
+      })
+      .catch(error => {
+        this.errorMessage = error.error.message;
+        this.failed = true;
+      })
       .then(() => this.loggingIn = false);
   }
 

@@ -1,0 +1,23 @@
+@import 'variables';
+
+form {
+  width: 50%;
+
+  .form-field {
+    padding: 10px 0;
+    display: flex;
+
+    label {
+      width: 100px;
+    }
+
+    input {
+      flex: 1;
+    }
+  }
+
+  .form-buttons {
+    padding: 5px 0;
+    text-align: right;
+  }
+}

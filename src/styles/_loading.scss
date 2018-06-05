@@ -1,0 +1,22 @@
+.loading {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:before {
+    content: '';
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 5px solid white;
+    border-top-color: var(--color-primary);
+    animation: spinner 0.7s ease-out infinite;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

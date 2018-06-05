@@ -38,7 +38,7 @@ router.post('/users', (req, res) => {
       const token = utilties.generateToken(payload);
       res.status(201).json({token: token});
     })
-    .catch(error => res.status(500).json({message: error}));
+    .catch(error => res.status(500).json({message: 'Failed to create new user'}));
 });
 
 // add authentication middleware for all other routes
