@@ -3,6 +3,7 @@
 @import 'animations';
 @import 'buttons';
 @import 'forms';
+@import 'layout';
 @import 'loading';
 @import 'errors';
 
@@ -27,6 +28,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
   font-weight: var(--weight-heavy);
+}
+
+h1 {
+  font-size: 3.5rem;
 }
 
 ul {

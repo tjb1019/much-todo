@@ -1,0 +1,48 @@
+@import 'variables';
+
+main {
+
+  .todo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .todos {
+      width: 600px;
+      padding: 5px;
+      background: var(--color-subtle);
+      box-shadow: var(--shadow);
+
+      .header {
+        padding: 10px;
+      }
+
+      .body {
+        padding: 10px;
+
+        ul li {
+          display: flex;
+          align-items: center;
+          padding: 5px 0;
+          border-bottom: 1px solid var(--color-tertiary);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          input[type="checkbox"] {
+            margin-right: 10px;
+          }
+        }
+      }
+
+      #newTodo {
+        width: 100%;
+        padding: 10px;
+        font-family: var(--font-primary);
+        font-size: 2rem;
+      }
+    }
+  }
+}

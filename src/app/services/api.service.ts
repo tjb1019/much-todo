@@ -10,11 +10,19 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  login(body: any): Promise<Object> {
-    return this.http.post(`${environment.apiPath}/login`, body).toPromise();
+  login(payload: Object): Promise<Object> {
+    return this.http.post(`${environment.apiPath}/login`, payload).toPromise();
   }
 
-  signup(body: any): Promise<Object> {
-    return this.http.post(`${environment.apiPath}/users`, body).toPromise();
+  signup(payload: Object): Promise<Object> {
+    return this.http.post(`${environment.apiPath}/users`, payload).toPromise();
+  }
+
+  getTodos(): Promise<Object> {
+    return this.http.get(`${environment.apiPath}/todos`).toPromise();
+  }
+
+  createTodo(payload: Object): Promise<Object> {
+    return this.http.post(`${environment.apiPath}/todos`, payload).toPromise();
   }
 }

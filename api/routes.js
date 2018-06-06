@@ -52,4 +52,28 @@ router.use((req, res, next) => {
   }
 });
 
+// get todos
+router.get('/todos', (req, res) => {
+  User.findOne({username: req.decoded.username})
+    .then(user => {
+      res.status(200).json({todos: user.todos});
+    })
+    .catch(error => {
+      res.status(400).json({message: 'Invalid username'});
+    });
+});
+
+// create todo
+router.post('/todos', (req, res) => {
+  User.findOne({username: req.decoded.username})
+    .then(user => {
+      user.todos.push(req.body.todo);
+      user.save();
+      res.status(200).json({todos: user.todos});
+    })
+    .catch(error => {
+      res.status(400).json({message: 'Invalid username'});
+    });
+});
+
 module.exports = router;
