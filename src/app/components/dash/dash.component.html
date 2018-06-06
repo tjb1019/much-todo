@@ -1,6 +1,6 @@
 <main>
   <section class="todo">
-    <h1>Much TODO</h1>
+    <h1>Much <span class="hl">TODO</span></h1>
     <div class="todos">
       <div class="header">
         <input type="text" id="newTodo" autofocus="true" placeholder="What needs to be done?">
@@ -8,8 +8,13 @@
       <div class="body">
         <ul>
           <li *ngFor="let todo of todos">
-            <input type="checkbox">
-            <span>{{ todo }}</span>
+            <div>
+              <input type="checkbox">
+              <span>{{ todo }}</span>
+            </div>
+            <div>
+              <span class="delete">&times;</span>
+            </div>
           </li>
         </ul>
       </div>
