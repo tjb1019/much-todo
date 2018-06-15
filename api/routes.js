@@ -21,7 +21,7 @@ router.post('/login', (req, res) => {
       }
     })
     .catch(error => {
-      res.status(400).json({message: 'Invalid username'});
+      res.status(400).json({message: 'LOGIN: cant find user in mongo'});
     });
 });
 
@@ -59,7 +59,7 @@ router.get('/todos', (req, res) => {
       res.status(200).json({todos: user.todos});
     })
     .catch(error => {
-      res.status(400).json({message: 'Invalid username'});
+      res.status(400).json({message: 'GET: cant find user in mongo'});
     });
 });
 
@@ -69,10 +69,24 @@ router.post('/todos', (req, res) => {
     .then(user => {
       user.todos.push(req.body.todo);
       user.save();
-      res.status(200).json({todos: user.todos});
+      res.status(201).json({message: 'Successfully added new todo'}); // double check http status code
     })
     .catch(error => {
-      res.status(400).json({message: 'Invalid username'});
+      res.status(400).json({message: 'POST: cant find user in mongo'});
+    });
+});
+
+// delete todo
+router.delete('/todos/:todo', (req, res) => {
+  User.findOne({username: req.decoded.username})
+    .then(user => {
+      user.todos = user.todos.filter(todo => todo != req.params.todo);
+      user.save();
+      res.status(201).json({message: 'TODO successfully deleted from MongoDB'}); // double check http status code
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(400).json({message: 'DELETE: cant find user in mongo'});
     });
 });
 

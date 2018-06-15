@@ -25,4 +25,8 @@ export class ApiService {
   createTodo(payload: Object): Promise<Object> {
     return this.http.post(`${environment.apiPath}/todos`, payload).toPromise();
   }
+
+  deleteTodo(todo: string): Promise<Object> {
+    return this.http.delete(`${environment.apiPath}/todos/${todo}`).toPromise();
+  }
 }

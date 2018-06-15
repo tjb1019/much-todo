@@ -13,7 +13,7 @@
               <span>{{ todo }}</span>
             </div>
             <div>
-              <span class="delete">&times;</span>
+              <span class="delete" (click)="deleteTodo(todo)">&times;</span>
             </div>
           </li>
         </ul>
