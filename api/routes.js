@@ -80,9 +80,12 @@ router.post('/todos', (req, res) => {
 router.delete('/todos/:todo', (req, res) => {
   User.findOne({username: req.decoded.username})
     .then(user => {
-      user.todos = user.todos.filter(todo => todo != req.params.todo);
-      user.save();
-      res.status(201).json({message: 'TODO successfully deleted from MongoDB'}); // double check http status code
+      const index = user.todos.findIndex(todo => todo.description == req.params.todo);
+      if (index > -1) {
+        user.todos[index].active = false;
+        user.save();
+        res.status(201).json({message: 'TODO successfully deleted from MongoDB'}); // double check http status code
+      }
     })
     .catch(error => {
       console.log(error);

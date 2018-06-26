@@ -27,6 +27,7 @@ main {
 
       .body {
         padding: 10px;
+        height: 300px;
 
         ul li {
           display: flex;
@@ -45,6 +46,31 @@ main {
 
           .delete {
             font-size: 2.5rem;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .footer {
+        display: flex;
+        padding: 5px;
+
+        .filters {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+
+          .filter {
+            display: inline-flex;
+            padding: 0 5px;
+            color: var(--color-tertiary);
+
+            &.active {
+              color: var(--color-primary);
+            }
 
             &:hover {
               cursor: pointer;

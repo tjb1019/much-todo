@@ -7,14 +7,22 @@
       </div>
       <div class="body">
         <ul>
-          <li *ngFor="let todo of todos">
+          <li *ngFor="let todo of selectedTodos">
             <div>
               <input type="checkbox">
-              <span>{{ todo }}</span>
+              <span>{{ todo.description }}</span>
             </div>
             <div>
               <span class="delete" (click)="deleteTodo(todo)">&times;</span>
             </div>
+          </li>
+        </ul>
+      </div>
+      <div class="footer">
+        <span class="count">Count: {{ selectedTodos?.length }}</span>
+        <ul class="filters">
+          <li class="filter" *ngFor="let filter of filters" [class.active]="filter == activeFilter" (click)="activateFilter(filter)">
+            {{ filter }}
           </li>
         </ul>
       </div>
