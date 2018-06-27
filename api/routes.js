@@ -11,8 +11,9 @@ mongoose.connect('mongodb://localhost/todo');
 // authenticate
 router.post('/login', (req, res) => {
   User.findOne({username: req.body.username})
-    .then(user => {
-      if (user.password == req.body.password) {
+    .then(async user => {
+      const valid = await utilties.checkPassword(req.body.password, user.password);
+      if (valid) {
         const payload = {username: user.username};
         const token = utilties.generateToken(payload);
         res.status(200).json({token: token});
@@ -26,10 +27,12 @@ router.post('/login', (req, res) => {
 });
 
 // new users
-router.post('/users', (req, res) => {
+router.post('/users', async (req, res) => {
+  const hashedPassword = await utilties.hashPassword(req.body.password)
+    .catch(error => res.status(500).json({message: 'Failed to hash user password'}));
   const user = new User({
     username: req.body.username,
-    password: req.body.password
+    password: hashedPassword
   });
 
   user.save()
