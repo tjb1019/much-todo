@@ -44,7 +44,7 @@ export class DashComponent implements OnInit {
         if (!this.todos.includes(todo)) {
           newTodo.value = null;
           this.todos.push(todo);
-          this.selectedTodos = this.todos;
+          this.selectedTodos = this.todos; // remove?
           this.api.createTodo({todo: todo})
             .then(response => console.log('saved todo to mongodb'))
             .catch(response => console.error('failed to save todo to mongodb'));
@@ -55,10 +55,20 @@ export class DashComponent implements OnInit {
     });
   }
 
-  deleteTodo(todo: Todo): void {
+  completeTodo(todo: Todo): void {
     const index = this.todos.indexOf(todo);
     this.todos[index].active = false;
-    this.todos = this.todos.filter(todo => todo.active); // change this - not sure how to yet
+    this.selectedTodos = this.todos;
+
+    this.api.completeTodo(todo.description)
+      .then(response => console.log('backend was able to delete todo from mongo'))
+      .catch(response => console.error(response.error.message));
+  }
+
+  deleteTodo(todo: Todo): void {
+    const index = this.todos.indexOf(todo);
+    this.todos.splice(index, 1);
+    this.selectedTodos = this.todos;
 
     this.api.deleteTodo(todo.description)
       .then(response => console.log('backend was able to delete todo from mongo'))

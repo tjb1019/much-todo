@@ -18,11 +18,11 @@ router.post('/login', (req, res) => {
         const token = utilties.generateToken(payload);
         res.status(200).json({token: token});
       } else {
-        res.status(400).json({message: 'Invalid password'});
+        res.status(401).json({message: 'Invalid password'});
       }
     })
     .catch(error => {
-      res.status(400).json({message: 'LOGIN: cant find user in mongo'});
+      res.status(401).json({message: 'LOGIN: cant find user in mongo'});
     });
 });
 
@@ -72,10 +72,10 @@ router.post('/todos', (req, res) => {
     .then(user => {
       user.todos.push(req.body.todo);
       user.save();
-      res.status(201).json({message: 'Successfully added new todo'}); // double check http status code
+      res.status(201).json({message: 'Successfully added new todo'});
     })
     .catch(error => {
-      res.status(400).json({message: 'POST: cant find user in mongo'});
+      res.status(404).json({message: 'POST: cant find user in mongo'});
     });
 });
 
@@ -85,14 +85,31 @@ router.delete('/todos/:todo', (req, res) => {
     .then(user => {
       const index = user.todos.findIndex(todo => todo.description == req.params.todo);
       if (index > -1) {
-        user.todos[index].active = false;
+        user.todos.splice(index, 1);
         user.save();
-        res.status(201).json({message: 'TODO successfully deleted from MongoDB'}); // double check http status code
+        res.status(202).json({message: 'TODO successfully deleted from MongoDB'});
       }
     })
     .catch(error => {
       console.log(error);
-      res.status(400).json({message: 'DELETE: cant find user in mongo'});
+      res.status(404).json({message: 'DELETE: cant find user in mongo'});
+    });
+});
+
+// complete todo
+router.put('/todos/:todo', (req, res) => {
+  User.findOne({username: req.decoded.username})
+    .then(user => {
+      const index = user.todos.findIndex(todo => todo.description == req.params.todo);
+      if (index > -1) {
+        user.todos[index].active = false;
+        user.save();
+        res.status(202).json({message: 'TODO successfully updated in MongoDB'});
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(404).json({message: 'PUT: cant find user in mongo'});
     });
 });
 

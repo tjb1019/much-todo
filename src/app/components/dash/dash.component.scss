@@ -40,8 +40,13 @@ main {
             border-bottom: none;
           }
 
-          input[type="checkbox"] {
+          button,
+          .checkmark {
             margin-right: 10px;
+          }
+
+          .checkmark {
+            color: var(--color-brand);
           }
 
           .delete {

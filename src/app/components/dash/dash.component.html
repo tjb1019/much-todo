@@ -9,7 +9,8 @@
         <ul>
           <li *ngFor="let todo of selectedTodos">
             <div>
-              <input type="checkbox">
+              <button *ngIf="todo.active" (click)="completeTodo(todo)">done</button>
+              <span *ngIf="!todo.active" class="checkmark">&#10004;</span>
               <span>{{ todo.description }}</span>
             </div>
             <div>
