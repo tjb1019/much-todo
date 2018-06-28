@@ -61,7 +61,7 @@ export class DashComponent implements OnInit {
     this.selectedTodos = this.todos;
 
     this.api.completeTodo(todo.description)
-      .then(response => console.log('backend was able to delete todo from mongo'))
+      .then(response => console.log('backend was able to update todo in mongo'))
       .catch(response => console.error(response.error.message));
   }
 
